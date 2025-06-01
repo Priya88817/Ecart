@@ -1,0 +1,56 @@
+<%- include('./partials/header') %>
+
+<% if (success.length > 0) { %>
+  <div class="fixed top-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-md bg-blue-600 text-white shadow-md z-50">
+    <%= success %>
+  </div>
+<% } %>
+
+<div class="flex min-h-screen bg-gray-50">
+  <!-- Sidebar -->
+  <aside class="w-1/4 p-8 border-r border-gray-200 bg-white sticky top-0 h-screen overflow-y-auto">
+    <div class="mb-10">
+      <h3 class="text-lg font-semibold mb-3">Browse</h3>
+      <nav class="flex flex-col gap-2 text-blue-600">
+        <a href="#newest" class="hover:underline">New Collection</a>
+        <a href="#discounted" class="hover:underline">Discounted Products</a>
+        <a href="#allproducts" class="hover:underline">All Products</a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Product Sections -->
+  <main class="w-3/4 p-10 space-y-20 overflow-y-auto">
+    <!-- Newest -->
+    <section id="newest">
+      <h2 class="text-2xl font-bold mb-6">New Collection</h2>
+      <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <% Newest.forEach(function(product) { %>
+          <%- include('./partials/productCard', { product: product }) %>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- Discounted -->
+    <section id="discounted">
+      <h2 class="text-2xl font-bold mb-6">Discounted Products</h2>
+      <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <% Discounted.forEach(function(product) { %>
+          <%- include('./partials/productCard', { product: product }) %>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- All Products -->
+    <section id="allproducts">
+      <h2 class="text-2xl font-bold mb-6">All Products</h2>
+      <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <% products.forEach(function(product) { %>
+          <%- include('./partials/productCard', { product: product }) %>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+</div>
+
+<%- include('./partials/footer') %>

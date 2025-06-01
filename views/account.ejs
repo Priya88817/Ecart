@@ -1,0 +1,42 @@
+<%- include('./partials/header') %>
+
+<div class="max-w-4xl mx-auto p-6 mt-10 bg-white rounded-2xl shadow-lg relative">
+
+  <!-- Edit Button -->
+  <a href="/users/account/edit" class="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition duration-200 shadow">
+    Edit Profile
+  </a>
+
+  <h2 class="text-3xl font-bold text-gray-800 mb-6">My Account</h2>
+
+  <!-- Profile Section -->
+  <div class="flex items-center space-x-6 mb-8">
+    <% if (user.picture) { %>
+      <img src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>" alt="Profile Picture" class="w-20 h-20 rounded-full shadow-md object-cover">
+    <% } else { %>
+      <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">N/A</div>
+    <% } %>
+    <div>
+      <h3 class="text-xl font-semibold text-gray-700"><%= user.fullname %></h3>
+      <p class="text-sm text-gray-500"><%= user.email %></p>
+      <p class="text-sm text-gray-500">Contact: <%= user.contact || "Not Provided" %></p>
+    </div>
+  </div>
+
+  <!-- Orders Section -->
+  <div>
+    <h4 class="text-2xl font-semibold text-gray-700 mb-4">My Orders</h4>
+    <% if (user.orders.length === 0) { %>
+      <p class="text-gray-500">You have no orders yet.</p>
+    <% } else { %>
+      <ul class="space-y-2">
+        <% user.orders.forEach((order, index) => { %>
+          <li class="bg-gray-50 p-3 rounded-md">
+            <span class="font-medium text-gray-800">Order <%= index + 1 %>:</span>
+            <pre class="text-sm text-gray-600"><%= JSON.stringify(order, null, 2) %></pre>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</div>

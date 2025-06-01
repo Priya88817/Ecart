@@ -1,0 +1,46 @@
+<%- include('./partials/header') %>
+
+<% if(success.length > 0){ %>
+  <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+    <span class="inline-block mt-1 mb-1 text-white">
+      <%= success %>
+    </span>
+  </div>
+<% } %>
+
+<div class="flex">
+  <!-- Sidebar -->
+  <div class="w-[20%] min-h-screen p-10">
+    <div class="flex flex-col">
+      <a class="block w-fit mb-2" href="/owners/Allproducts">All Products</a>
+      <a class="block w-fit mb-2" href="/owners/admin">Create new product</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-[75%] p-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <% products.forEach(function(product){ %>
+        <div class="w-full">
+          <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+            <img class="h-[12rem]" src="data:images/jpeg;base64,<%= product.image.toString('base64') %>" alt="">
+          </div>
+          <div class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+            <div>
+              <h3><%= product.name %></h3>
+              <h4>₹ <%= product.price %></h4>
+            </div>
+            <form action="/owners/editProduct/<%= product._id %>" method="get">
+              <input type="submit" value="✏️" class="px-3 py-1 bg-red-200 text-white rounded-md hover:bg-lime-500 transition-all duration-200 shadow-md cursor-pointer" />
+            </form>
+            <form action="/owners/removeProduct/<%= product._id %>" method="post">
+              <input type="submit" value="🗑️" class="px-3 py-1 bg-red-200 text-white rounded-md hover:bg-red-600 transition-all duration-200 shadow-md cursor-pointer" />
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer') %>

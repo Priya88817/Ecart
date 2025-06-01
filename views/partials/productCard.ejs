@@ -1,0 +1,14 @@
+<div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+  <div class="w-full h-52 flex items-center justify-center rounded-md mb-4 bg-[<%= product.bgcolor %>]">
+    <img class="max-h-48 object-contain" src="data:images/jpeg;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>">
+  </div>
+  <div class="flex justify-between items-center bg-[<%= product.panelcolor %>] text-[<%= product.textcolor %>] px-4 py-3 rounded-md">
+    <div>
+      <h3 class="font-semibold"><%= product.name %></h3>
+      <p class="text-sm">₹ <%= product.price %></p>
+    </div>
+    <a class="w-8 h-8 flex items-center justify-center bg-white rounded-full text-xl hover:bg-blue-100 transition" href="/addtocart/<%= product._id %>">
+      <i class="ri-add-line"></i>
+    </a>
+  </div>
+</div>
